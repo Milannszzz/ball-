@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ball Brothers | Hoop Dreams</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Bebas+Neue&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        
+        .title-font {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 1px;
+        }
+        
+        .orange-gradient {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+        }
+        
+        .player-card {
+            transition: all 0.3s ease;
+            perspective: 1000px;
+        }
+        
+        .player-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .player-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .player-card:hover .player-card-inner {
+            transform: rotateY(10deg);
+        }
+        
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -3px;
+            left: 0;
+            background-color: #f97316;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .court-bg {
+            background-image: url('https://images.unsplash.com/photo-1543357481-d334891f4d0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-blend-mode: multiply;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        
+        .stats-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        .highlight-video {
+            transition: all 0.3s ease;
+        }
+        
+        .highlight-video:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-basketball-ball text-2xl text-orange-500"></i>
+                <a href="#" class="title-font text-2xl">THE BALL BROTHERS</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="nav-link text-slate-700 hover:text-orange-500">About</a>
+                <a href="#players" class="nav-link text-slate-700 hover:text-orange-500">Players</a>
+                <a href="#stats" class="nav-link text-slate-700 hover:text-orange-500">Stats</a>
+                <a href="#highlights" class="nav-link text-slate-700 hover:text-orange-500">Highlights</a>
+                <a href="#contact" class="nav-link text-slate-700 hover:text-orange-500">Contact</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-slate-700 hover:text-orange-500"><i class="fas fa-calendar-alt"></i></a>
+                <button class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center court-bg text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="title-font text-5xl md:text-7xl font-bold mb-6">BALL BROTHERS</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Three young brothers from Lagos chasing their basketball dreams together</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-8 rounded-full transition transform hover:scale-105">
+                    Watch Highlights <i class="fas fa-play ml-2"></i>
+                </button>
+                <button class="bg-white hover:bg-gray-100 text-orange-600 font-medium py-3 px-8 rounded-full transition transform hover:scale-105">
+                    Meet The Brothers <i class="fas fa-users ml-2"></i>
+                </button>
+            </div>
+            <div class="absolute bottom-10 left-0 right-0 flex justify-center bounce">
+                <a href="#about" class="text-white text-3xl">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="title-font text-3xl md:text-4xl font-bold mb-4 text-slate-800">Our Story</h2>
+                <div class="w-20 h-1 bg-orange-400 mx-auto mb-6"></div>
+                <p class="text-lg md:text-xl max-w-4xl mx-auto">Born and raised in Lagos, Nigeria, the Ball Brothers have been dribbling since they could walk. With a shared passion for basketball and an unbreakable bond, these three young athletes are making waves in Nigerian youth basketball.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-orange-50 p-8 rounded-lg">
+                    <div class="text-orange-500 text-4xl mb-4">
+                        <i class="fas fa-basketball-ball"></i>
+                    </div>
+                    <h3 class="title-font text-xl font-bold mb-3 text-slate-800">Basketball Roots</h3>
+                    <p class="text-slate-600">Growing up with a basketball hoop in their Lagos neighborhood, the brothers spent countless hours practicing together and developing their skills.</p>
+                </div>
+                <div class="bg-orange-50 p-8 rounded-lg">
+                    <div class="text-orange-500 text-4xl mb-4">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="title-font text-xl font-bold mb-3 text-slate-800">Championship Mentality</h3>
+                    <p class="text-slate-600">With multiple Nigerian youth league championships under their belts, these brothers know what it takes to win as a team.</p>
+                </div>
+                <div class="bg-orange-50 p-8 rounded-lg">
+                    <div class="text-orange-500 text-4xl mb-4">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="title-font text-xl font-bold mb-3 text-slate-800">Brotherhood</h3>
+                    <p class="text-slate-600">More than just teammates, these brothers support each other on and off the court, pushing each other to be their best.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Players Section -->
+    <section id="players" class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="title-font text-3xl md:text-4xl font-bold mb-4 text-slate-800">Meet The Brothers</h2>
+                <div class="w-20 h-1 bg-orange-400 mx-auto mb-6"></div>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto">Three unique players, one unstoppable team</p>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-8">
+                <!-- Player 1 -->
+                <div class="player-card">
+                    <div class="player-card-inner">
+                        <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+                            <div class="h-64 bg-slate-100 flex items-center justify-center relative">
+                                <img src="https://images.unsplash.com/photo-1600181983120-9b5b3d0b9f0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Sancho Ball" class="w-full h-full object-cover">
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                    <h3 class="text-white font-bold text-xl">Sancho "MJ" Ball</h3>
+                                    <p class="text-orange-300 text-sm">Point Guard | Age 14</p>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded">#10</span>
+                                    <div class="flex space-x-2 text-orange-500">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                </div>
+                                <p class="text-slate-600 text-sm mb-4">The floor general with elite court vision and handles. Leads the team in assists and steals.</p>
+                                <div class="flex justify-between text-xs text-slate-500">
+                                    <span><i class="fas fa-running mr-1"></i> 5'9"</span>
+                                    <span><i class="fas fa-weight mr-1"></i> 145 lbs</span>
+                                    <span><i class="fas fa-bolt mr-1"></i> Quick</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Player 2 -->
+                <div class="player-card">
+                    <div class="player-card-inner">
+                        <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+                            <div class="h-64 bg-slate-100 flex items-center justify-center relative">
+                                <img src="https://images.unsplash.com/photo-1600181983120-9b5b3d0b9f0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Enzy Ball" class="w-full h-full object-cover">
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                    <h3 class="text-white font-bold text-xl">Enzy "Slam" Ball</h3>
+                                    <p class="text-orange-300 text-sm">Shooting Guard | Age 13</p>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded">#23</span>
+                                    <div class="flex space-x-2 text-orange-500">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                </div>
+                                <p class="text-slate-600 text-sm mb-4">The scorer with unlimited range and explosive athleticism. Leads the team in points per game.</p>
+                                <div class="flex justify-between text-xs text-slate-500">
+                                    <span><i class="fas fa-running mr-1"></i> 5'11"</span>
+                                    <span><i class="fas fa-weight mr-1"></i> 155 lbs</span>
+                                    <span><i class="fas fa-bolt mr-1"></i> Athletic</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Player 3 -->
+                <div class="player-card">
+                    <div class="player-card-inner">
+                        <div class="bg-white rounded-lg overflow-hidden shadow-sm">
+                            <div class="h-64 bg-slate-100 flex items-center justify-center relative">
+                                <img src="https://images.unsplash.com/photo-1600181983120-9b5b3d0b9f0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Emann Ball" class="w-full h-full object-cover">
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                                    <h3 class="text-white font-bold text-xl">Emann "Big T" Ball</h3>
+                                    <p class="text-orange-300 text-sm">Center | Age 12</p>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded">#34</span>
+                                    <div class="flex space-x-2 text-orange-500">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <p class="text-slate-600 text-sm mb-4">The defensive anchor with a soft touch around the rim. Leads the team in rebounds and blocks.</p>
+                                <div class="flex justify-between text-xs text-slate-500">
+                                    <span><i class="fas fa-running mr-1"></i> 6'1"</span>
+                                    <span><i class="fas fa-weight mr-1"></i> 175 lbs</span>
+                                    <span><i class="fas fa-bolt mr-1"></i> Strong</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="py-20 stats-bg text-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="title-font text-3xl md:text-4xl font-bold mb-4">Season Stats</h2>
+                <div class="w-20 h-1 bg-orange-400 mx-auto mb-6"></div>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto">The numbers that tell the story of their season</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white bg-opacity-10 p-8 rounded-lg backdrop-blur-sm border border-white border-opacity-20">
+                    <h3 class="title-font text-xl font-bold mb-4 text-center">Sancho "MJ" Ball</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Points Per Game</span>
+                                <span class="text-sm font-bold">18.7</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Assists Per Game</span>
+                                <span class="text-sm font-bold">8.2</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Steals Per Game</span>
+                                <span class="text-sm font-bold">3.5</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">3PT %</span>
+                                <span class="text-sm font-bold">38.4%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-10 p-8 rounded-lg backdrop-blur-sm border border-white border-opacity-20">
+                    <h3 class="title-font text-xl font-bold mb-4 text-center">Enzy "Slam" Ball</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Points Per Game</span>
+                                <span class="text-sm font-bold">24.3</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Rebounds Per Game</span>
+                                <span class="text-sm font-bold">5.8</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Dunks</span>
+                                <span class="text-sm font-bold">22</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">FT %</span>
+                                <span class="text-sm font-bold">82.1%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-10 p-8 rounded-lg backdrop-blur-sm border border-white border-opacity-20">
+                    <h3 class="title-font text-xl font-bold mb-4 text-center">Emann "Big T" Ball</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Points Per Game</span>
+                                <span class="text-sm font-bold">15.9</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Rebounds Per Game</span>
+                                <span class="text-sm font-bold">12.4</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">Blocks Per Game</span>
+                                <span class="text-sm font-bold">4.7</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium">FG %</span>
+                                <span class="text-sm font-bold">61.3%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-orange-500 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section id="highlights" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="title-font text-3xl md:text-4xl font-bold mb-4 text-slate-800">Game Highlights</h2>
+                <div class="w-20 h-1 bg-orange-400 mx-auto mb-6"></div>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto">Watch the Ball Brothers in action</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="highlight-video bg-gray-100 rounded-lg overflow-hidden">
+                    <div class="relative pb-[56.25%]">
+                        <div class="absolute inset-0 flex items-center justify-center bg-black">
+                            <div class="text-center">
+                                <button class="bg-orange-500 hover:bg-orange-600 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-play text-xl"></i>
+                                </button>
+                                <p class="text-white font-medium">Sancho's 15 Assist Game</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Sancho's Court Vision</h3>
+                        <p class="text-slate-600 text-sm">Watch MJ dish out 15 assists in the championship game</p>
+                    </div>
+                </div>
+                <div class="highlight-video bg-gray-100 rounded-lg overflow-hidden">
+                    <div class="relative pb-[56.25%]">
+                        <div class="absolute inset-0 flex items-center justify-center bg-black">
+                            <div class="text-center">
+                                <button class="bg-orange-500 hover:bg-orange-600 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-play text-xl"></i>
+                                </button>
+                                <p class="text-white font-medium">Enzy's 40-Point Game</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Slam's Scoring Clinic</h3>
+                        <p class="text-slate-600 text-sm">Enzy drops 40 with 8 three-pointers</p>
+                    </div>
+                </div>
+                <div class="highlight-video bg-gray-100 rounded-lg overflow-hidden">
+                    <div class="relative pb-[56.25%]">
+                        <div class="absolute inset-0 flex items-center justify-center bg-black">
+                            <div class="text-center">
+                                <button class="bg-orange-500 hover:bg-orange-600 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-play text-xl"></i>
+                                </button>
+                                <p class="text-white font-medium">Emann's Triple-Double</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Big T's Dominance</h3>
+                        <p class="text-slate-600 text-sm">20 points, 18 rebounds, 10 blocks in one game</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <button class="border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-medium py-3 px-8 rounded-full transition">
+                    View All Highlights <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 orange-gradient text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="title-font text-3xl md:text-4xl font-bold mb-12">What Coaches Say</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white bg-opacity-20 p-8 rounded-lg backdrop-blur-sm">
+                    <div class="text-3xl text-orange-100 mb-4">"</div>
+                    <p class="mb-6">The Ball Brothers have an incredible basketball IQ for their age. Their teamwork is unmatched in Nigerian youth basketball.</p>
+                    <div class="font-bold">- Coach Williams</div>
+                    <div class="text-sm opacity-80">Lagos AAU Coach</div>
+                </div>
+                <div class="bg-white bg-opacity-20 p-8 rounded-lg backdrop-blur-sm">
+                    <div class="text-3xl text-orange-100 mb-4">"</div>
+                    <p class="mb-6">Sancho sees the court like a pro already. His passing ability is special for a 14-year-old.</p>
+                    <div class="font-bold">- Coach Thompson</div>
+                    <div class="text-sm opacity-80">Lagos Middle School Coach</div>
+                </div>
+                <div class="bg-white bg-opacity-20 p-8 rounded-lg backdrop-blur-sm">
+                    <div class="text-3xl text-orange-100 mb-4">"</div>
+                    <p class="mb-6">Enzy's athleticism is off the charts. He has NBA-level bounce already at 13 years old.</p>
+                    <div class="font-bold">- Coach Davis</div>
+                    <div class="text-sm opacity-80">Lagos Skills Trainer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="title-font text-3xl md:text-4xl font-bold mb-4 text-slate-800">Get In Touch</h2>
+                <div class="w-20 h-1 bg-orange-400 mx-auto mb-6"></div>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto">Interested in booking the Ball Brothers for camps, appearances, or media? Reach out to their team.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Your Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-slate-700 mb-1">Your Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition">
+                            Send Message <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+                <div>
+                    <div class="bg-white p-8 rounded-xl h-full shadow-sm">
+                        <h3 class="title-font text-xl font-bold mb-6 text-slate-800">Contact Details</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-orange-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-phone text-orange-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Phone Numbers</h4>
+                                    <p class="text-slate-700">Sancho: +234 815 651 1601</p>
+                                    <p class="text-slate-700">Enzy: +234 904 247 0850</p>
+                                    <p class="text-slate-700">Emann: +234 916 883 2046</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-orange-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-envelope text-orange-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Email</h4>
+                                    <p class="text-slate-700">contact@ballbrothers.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-orange-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-map-marker-alt text-orange-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Training Facility</h4>
+                                    <p class="text-slate-700">Lagos Youth Basketball Academy</p>
+                                    <p class="text-slate-700">123 Hoops Way, Lagos, Nigeria</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-orange-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-hashtag text-orange-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Follow The Journey</h4>
+                                    <div class="flex space-x-4 mt-2">
+                                        <a href="#" class="bg-orange-500 text-white p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-orange-600 transition">
+                                            <i class="fab fa-instagram"></i>
+                                        </a>
+                                        <a href="#" class="bg-orange-500 text-white p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-orange-600 transition">
+                                            <i class="fab fa-twitter"></i>
+                                        </a>
+                                        <a href="#" class="bg-orange-500 text-white p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-orange-600 transition">
+                                            <i class="fab fa-youtube"></i>
+                                        </a>
+                                        <a href="#" class="bg-orange-500 text-white p-2 rounded-full w-10 h-10 flex items-center justify-center hover:bg-orange-600 transition">
+                                            <i class="fab fa-tiktok"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-slate-800 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="title-font text-3xl md:text-4xl font-bold mb-4">Join The Ball Brothers Family</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto">Subscribe for updates on games, highlights, and the brothers' journey</p>
+            <div class="max-w-md mx-auto flex">
+                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-l-lg focus:outline-none text-slate-900">
+                <button class="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-r-lg font-medium transition">
+                    Subscribe <i class="fas fa-basketball-ball ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-10">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-basketball-ball text-xl text-orange-500"></i>
+                        <span class="title-font text-xl font-bold">BALL BROTHERS</span>
+                    </div>
+                    <p class="text-slate-400">Three brothers from Lagos. One dream. Basketball excellence.</p>
+                </div>
+                <div>
+                    <h3 class="title-font text-lg font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-slate-400 hover:text-orange-400 transition">About</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-orange-400 transition">Players</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-orange-400 transition">Highlights</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-orange-400 transition">Schedule</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-orange-400 transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="title-font text-lg font-bold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-slate-400 hover:text-orange-400 transition">Basketball Camps</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-orange-400 transition">Training Videos</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-orange-400 transition">Nutrition Guide</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-orange-400 transition">Recruitment Tips</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="title-font text-lg font-bold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-slate-400 hover:text-orange-400 transition">Privacy Policy</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-orange-400 transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-orange-400 transition">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-slate-400 mb-4 md:mb-0">© 2023 The Ball Brothers. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-slate-400 hover:text-orange-400 transition">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-orange-400 transition">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-orange-400 transition">
+                        <i class="fab fa-youtube text-xl"></i>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-orange-400 transition">
+                        <i class="fab fa-tiktok text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.md\\:hidden');
+        const mobileMenu = document.createElement('div');
+        mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+        mobileMenu.innerHTML = `
+            <button class="absolute top-6 right-6 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="space-y-8 text-center">
+                <a href="#about" class="block text-2xl font-medium hover:text-orange-500">About</a>
+                <a href="#players" class="block text-2xl font-medium hover:text-orange-500">Players</a>
+                <a href="#stats" class="block text-2xl font-medium hover:text-orange-500">Stats</a>
+                <a href="#highlights" class="block text-2xl font-medium hover:text-orange-500">Highlights</a>
+                <a href="#contact" class="block text-2xl font-medium hover:text-orange-500">Contact</a>
+            </div>
+        `;
+        document.body.appendChild(mobileMenu);
+
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+
+        mobileMenu.querySelector('button').addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Highlight video play buttons
+        document.querySelectorAll('.highlight-video button').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Video player would open here in a real implementation');
+            });
+        });
+    </script>
+</body>
+</html>
